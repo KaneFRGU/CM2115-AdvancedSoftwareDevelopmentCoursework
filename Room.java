@@ -12,11 +12,5 @@ public class Room {
         this.canRight = builder.getCanRight();
     }
 
-    @Override
-    public String toString() {
-        return "Room [name=" + name + ", type=" + type + ", canForward=" + canForward + ", canBackward=" + canBackward
-                + ", canLeft=" + canLeft + ", canRight=" + canRight + "]";
-    }
-
     
 }
