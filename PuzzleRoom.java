@@ -1,5 +1,5 @@
-public class PuzzleRoom extends Room {
+public class PuzzleRoom {
     public void puzzle(){
-
+        
     }
 }
