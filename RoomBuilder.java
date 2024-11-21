@@ -2,15 +2,27 @@ public class RoomBuilder {
 
     private String name;
     private String type;
-    private Boolean canForward;
-    private Boolean canBackward;
-    private Boolean canLeft;
-    private Boolean canRight;
+    private Boolean canForward = false;
+    private Boolean canBackward = false;
+    private Boolean canLeft = false;
+    private Boolean canRight = false;
+    private Boolean isPuzzle = false;
+    private Boolean isBattle = false;
 
+    public Boolean getIsPuzzle() {
+        return isPuzzle;
+    }
 
-    public RoomBuilder(String name, String type) {
-        this.name = name;
-        this.type = type;
+    public void setIsPuzzle(Boolean isPuzzle) {
+        this.isPuzzle = isPuzzle;
+    }
+
+    public Boolean getIsBattle() {
+        return isBattle;
+    }
+
+    public void setIsBattle(Boolean isBattle) {
+        this.isBattle = isBattle;
     }
 
     public String getName() {
@@ -61,7 +73,11 @@ public class RoomBuilder {
         this.canRight = canRight;
     }
 
-    
+    public RoomBuilder(String name, String type) {
+        this.name = name;
+        this.type = type;
+    }
+
     public RoomBuilder canMoveForward(){
         this.canForward = true;
         return this;
@@ -78,6 +94,15 @@ public class RoomBuilder {
         this.canRight = true;
         return this;
     };
+    public RoomBuilder isPuzzle(){
+        this.isPuzzle = true;
+        return this;
+    }
+    public RoomBuilder isBattle(){
+        this.isPuzzle = true;
+        return this;
+    }
+
 
     public Room build(){
         return new Room(this);
