@@ -2,12 +2,16 @@ public class RoomBuilder {
 
     private String name;
     private String type;
-    private Boolean canForward = false;
-    private Boolean canBackward = false;
-    private Boolean canLeft = false;
-    private Boolean canRight = false;
-    private Boolean isPuzzle = false;
-    private Boolean isBattle = false;
+    private roomConnector roomConnector;
+    private Boolean canForward = false, canBackward = false, canLeft = false, canRight = false, isPuzzle = false, isBattle = false;
+
+    public roomConnector getRoomConnector() {
+            return roomConnector;
+    }
+
+    public void setRoomConnector(roomConnector roomConnector) {
+        this.roomConnector = roomConnector;
+    }
 
     public Boolean getIsPuzzle() {
         return isPuzzle;
@@ -73,7 +77,8 @@ public class RoomBuilder {
         this.canRight = canRight;
     }
 
-    public RoomBuilder(String name, String type) {
+    public RoomBuilder(String name, String type, roomConnector roomConnector) {
+        this.roomConnector = roomConnector;
         this.name = name;
         this.type = type;
     }

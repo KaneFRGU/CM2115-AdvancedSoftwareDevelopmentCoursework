@@ -1,11 +1,15 @@
 public class Room {
     private String name;
     private String type;
+
+    roomConnector roomConnector;
     private boolean canForward, canBackward, canLeft, canRight, isBattle, isPuzzle;
+    public Room forwardRoom, leftRoom, rightRoom, backRoom;
 
     public Room(RoomBuilder builder) {
         this.name = builder.getName();
         this.type = builder.getType();
+        this.roomConnector = builder.getRoomConnector();
         this.canForward = builder.getCanForward();
         this.canBackward = builder.getCanBackward();
         this.canLeft = builder.getCanLeft();
@@ -28,6 +32,14 @@ public class Room {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public roomConnector getRoomConnector() {
+        return roomConnector;
+    }
+
+    public void setRoomConnector(roomConnector roomConnector) {
+        this.roomConnector = roomConnector;
     }
 
     public boolean isCanForward() {
@@ -79,7 +91,7 @@ public class Room {
     }
 
     public static RoomBuilder builder() {
-        return new RoomBuilder("Living room", "puzzle");
+        return new RoomBuilder("", "", null);
       }
 
     

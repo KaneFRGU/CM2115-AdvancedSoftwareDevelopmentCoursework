@@ -1,64 +1,62 @@
-
+import java.util.*;
 public class moves{
 
-    public Room currentRoom, forwardRoom, leftRoom, rightRoom, backRoom;
-    public int moves = 0;
-
-    
-
-    public moves(Room currentRoom, int moves, Room forwardRoom, Room leftRoom, Room rightRoom, Room backRoom) {
-        this.currentRoom = currentRoom;
-        this.moves = moves;
-        this.forwardRoom = forwardRoom;
-        this.leftRoom = leftRoom;
-        this.rightRoom = rightRoom;
-        this.backRoom = backRoom;
-        
-    }
-
-    
-
     public void scanRoom(){
-        if(currentRoom.getType() == "Empty"){
-            System.out.println("The room is... empty. Nothing valuable to be found here. We should go deeper.");
+        if(App.currentRoom.getType() == "Empty"){
+            System.out.println("The room is... empty. Nothing valuable to be found here. I should go deeper.");
+        }
+        else if(App.currentRoom.getType() == "Puzzle"){
+            System.out.println("The room is filled with strange contraptions. Investigate?");
+            System.out.println("1 - Yes");
+            System.out.println("2 - No");
+            Scanner sc = new Scanner(System.in);
+            String input = sc.next();
+            if(input == "1" ){
+                System.out.println("ok yes");
+            }
+            if(input == "2" ){
+                System.out.println("ok no");
+            }
+            else{
+                scanRoom();
+            }
+        }
+        else if(App.currentRoom.getType() == "Battle"){
+            System.out.println("The room is... empty. Nothing valuable to be found here. I should go deeper.");
         }
     }
 
     public void moveForward(){
-        if(currentRoom.isCanForward()){
+        if(App.currentRoom.isCanForward()){
             System.out.println("You move forward towards the next room.");
-            currentRoom = forwardRoom;
-            
+            App.currentRoom = App.currentRoom.roomConnector.forwardRoom;
         }
         else{
             System.out.println("Cant go that way.");
         }
     }
     public void moveLeft(){
-        if(currentRoom.isCanLeft()){
+        if(App.currentRoom.isCanLeft()){
             System.out.println("You move left towards another room.");
-            currentRoom = leftRoom;
-            
+            App.currentRoom = App.currentRoom.roomConnector.leftRoom;
         }
         else{
             System.out.println("Cant go that way.");
         }
     }
     public void moveRight(){
-        if(currentRoom.isCanRight()){
+        if(App.currentRoom.isCanRight()){
             System.out.println("You move right towards another room.");
-            currentRoom = rightRoom;
-            
+            App.currentRoom = App.currentRoom.roomConnector.rightRoom;
         }
         else{
             System.out.println("Cant go that way.");
         }
     }
     public void moveBackward(){
-        if(currentRoom.isCanBackward()){
+        if(App.currentRoom.isCanBackward()){
             System.out.println("You move back towards another room.");
-            currentRoom = backRoom;
-            
+            App.currentRoom = App.currentRoom.roomConnector.backRoom;
         }
         else{
             System.out.println("Cant go that way.");
