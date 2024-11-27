@@ -1,9 +1,10 @@
 import java.util.*;
 public class moves{
 
-    public PuzzleRoom currentRoom;
-
     public void scanRoom(){
+
+        RoomEvent event = new RoomEvent();
+
         if(App.currentRoom.locked == true){
             System.out.println("The doors must have locked once i stepped in.");
         }
@@ -16,10 +17,11 @@ public class moves{
             System.out.println("2 - No");
             Scanner sc = new Scanner(System.in);
             int input = sc.nextInt();
-            if(input == 1 ){
-                currentRoom.Puzzle();
+
+            if(input == 1){
+                App.currentRoom.accept(event);
             }
-            if(input == 2 ){
+            if(input == 2){
                 System.out.println("ok no");
             }
             else{

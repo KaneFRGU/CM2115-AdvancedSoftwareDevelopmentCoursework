@@ -3,14 +3,14 @@ import java.util.*;
 public class App {
     public static Room currentRoom;
     public static Player player;
-    public static roomConnector currentRoomConnector;
- 
-    private static int moves = 0;
     private static boolean finish = false;
+
     public static void main(String[] args) {
 
-            Room Starter = new PuzzleRoom("Entrance Room", "empty", false, null, null, null, null);
-            Room room1 = new Room("Room 1", "puzzle", true, null, null, null, null);
+        RoomEvent event = new RoomEvent();
+
+            Room Starter = new PuzzleRoom("Entrance Room", "puzzle", false, null, null, null, null);
+            Room room1 = new PuzzleRoom("Room 1", "puzzle", true, null, null, null, null);
             Room room2 = new Room("Room 2", "puzzle", true, null, null, null, null);
             Room room3 = new Room("Room 3", "empty", true, null, null, null, null);
                             
@@ -19,6 +19,7 @@ public class App {
 
         Starter.setForwardRoom(room1); Starter.setLeftRoom(room2); Starter.setRightRoom(room3);
         room1.setBackRoom(Starter);
+        
 
         moves move = new moves();
 
