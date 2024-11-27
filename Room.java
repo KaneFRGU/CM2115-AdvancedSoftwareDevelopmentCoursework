@@ -1,22 +1,62 @@
 public class Room {
     private String name;
     private String type;
+    public boolean locked;
+    public Room forwardRoom;
+    public Room leftRoom;
+    public Room rightRoom;
+    public Room backRoom;
 
-    roomConnector roomConnector;
-    private boolean canForward, canBackward, canLeft, canRight, isBattle, isPuzzle;
-    public Room forwardRoom, leftRoom, rightRoom, backRoom;
-
-    public Room(RoomBuilder builder) {
-        this.name = builder.getName();
-        this.type = builder.getType();
-        this.roomConnector = builder.getRoomConnector();
-        this.canForward = builder.getCanForward();
-        this.canBackward = builder.getCanBackward();
-        this.canLeft = builder.getCanLeft();
-        this.canRight = builder.getCanRight();
-        this.isBattle = builder.getIsBattle();
-        this.isPuzzle = builder.getIsPuzzle();
+    public Room(String name, String type, boolean locked, Room forwardRoom, Room leftRoom, Room rightRoom, Room backRoom) {
+        this.name = name;
+        this.type = type;
+        this.locked = locked;
+        this.forwardRoom = forwardRoom;
+        this.leftRoom = leftRoom;
+        this.rightRoom = rightRoom;
+        this.backRoom = backRoom;
     }
+
+    public boolean isLocked() {
+        return locked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
+    }
+
+    public Room getForwardRoom() {
+        return forwardRoom;
+    }
+
+    public void setForwardRoom(Room forwardRoom) {
+        this.forwardRoom = forwardRoom;
+    }
+
+    public Room getLeftRoom() {
+        return leftRoom;
+    }
+
+    public void setLeftRoom(Room leftRoom) {
+        this.leftRoom = leftRoom;
+    }
+
+    public Room getRightRoom() {
+        return rightRoom;
+    }
+
+    public void setRightRoom(Room rightRoom) {
+        this.rightRoom = rightRoom;
+    }
+
+    public Room getBackRoom() {
+        return backRoom;
+    }
+
+    public void setBackRoom(Room backRoom) {
+        this.backRoom = backRoom;
+    }
+
 
     public String getName() {
         return name;
@@ -33,66 +73,4 @@ public class Room {
     public void setType(String type) {
         this.type = type;
     }
-
-    public roomConnector getRoomConnector() {
-        return roomConnector;
-    }
-
-    public void setRoomConnector(roomConnector roomConnector) {
-        this.roomConnector = roomConnector;
-    }
-
-    public boolean isCanForward() {
-        return canForward;
-    }
-
-    public void setCanForward(boolean canForward) {
-        this.canForward = canForward;
-    }
-
-    public boolean isCanBackward() {
-        return canBackward;
-    }
-
-    public void setCanBackward(boolean canBackward) {
-        this.canBackward = canBackward;
-    }
-
-    public boolean isCanLeft() {
-        return canLeft;
-    }
-
-    public void setCanLeft(boolean canLeft) {
-        this.canLeft = canLeft;
-    }
-
-    public boolean isCanRight() {
-        return canRight;
-    }
-
-    public void setCanRight(boolean canRight) {
-        this.canRight = canRight;
-    }
-
-    public boolean isBattle() {
-        return isBattle;
-    }
-
-    public void setBattle(boolean isBattle) {
-        this.isBattle = isBattle;
-    }
-
-    public boolean isPuzzle() {
-        return isPuzzle;
-    }
-
-    public void setPuzzle(boolean isPuzzle) {
-        this.isPuzzle = isPuzzle;
-    }
-
-    public static RoomBuilder builder() {
-        return new RoomBuilder("", "", null);
-      }
-
-    
 }
