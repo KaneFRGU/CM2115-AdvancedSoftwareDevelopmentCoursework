@@ -75,4 +75,8 @@ public class Room {
     }
 
     
+    public void accept(RoomEventVisitor visitor){
+    }
+
+    
 }

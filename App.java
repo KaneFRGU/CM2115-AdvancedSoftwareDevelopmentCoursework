@@ -41,8 +41,6 @@ public class App {
             System.out.println("4 - Right");
             System.out.println("5 - Backward");
 
-
-
             int input2 = Integer.parseInt(sc.next());;
 
             if (input2 == 1){
