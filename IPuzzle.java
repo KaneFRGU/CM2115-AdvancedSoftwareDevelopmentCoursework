@@ -1,3 +1,3 @@
 public interface IPuzzle {
-    public void Puzzle();
+    public void showPuzzle();
 }

@@ -28,6 +28,23 @@ public class moves{
                 scanRoom();
             }
         }
+        else if(App.currentRoom.getType() == "battle"){
+            System.out.println("Theres noises coming from behind a wall. Sounds like people talking. Investigate?");
+            System.out.println("1 - Yes");
+            System.out.println("2 - No");
+            Scanner sc = new Scanner(System.in);
+            int input = sc.nextInt();
+
+            if(input == 1){
+                App.currentRoom.accept(event);
+            }
+            if(input == 2){
+                System.out.println("ok no");
+            }
+            else{
+                scanRoom();
+            }
+        }
         else{
             System.out.println("The room is... empty. Nothing valuable to be found here. I should go deeper.");
         }
@@ -38,6 +55,9 @@ public class moves{
             System.out.println("You move forward towards the next room.");
             App.currentRoom = App.currentRoom.forwardRoom;
         }
+        if(App.currentRoom.locked){
+            System.out.println("The doors seem to be locked");
+        }
         else{
             System.out.println("Cant go that way.");
         }
@@ -46,6 +66,9 @@ public class moves{
         if(App.currentRoom.leftRoom != null && App.currentRoom.locked == false){
             System.out.println("You move left towards another room.");
             App.currentRoom = App.currentRoom.leftRoom;
+        }
+        if(App.currentRoom.locked){
+            System.out.println("The doors seem to be locked");
         }
         else{
             System.out.println("Cant go that way.");
@@ -56,6 +79,9 @@ public class moves{
             System.out.println("You move right towards another room.");
             App.currentRoom = App.currentRoom.rightRoom;
         }
+        if(App.currentRoom.locked){
+            System.out.println("The doors seem to be locked");
+        }
         else{
             System.out.println("Cant go that way.");
         }
@@ -64,6 +90,9 @@ public class moves{
         if(App.currentRoom.backRoom != null && App.currentRoom.locked == false){
             System.out.println("You move back towards another room.");
             App.currentRoom = App.currentRoom.backRoom;
+        }
+        if(App.currentRoom.locked){
+            System.out.println("The doors seem to be locked");
         }
         else{
             System.out.println("Cant go that way.");
