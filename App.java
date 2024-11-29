@@ -2,45 +2,53 @@ import java.util.*;
 
 public class App {
     public static Room currentRoom;
-    public static Player player;
-    private static boolean finish = false;
-
-    public static void main(String[] args) {
-
-        RoomEvent event = new RoomEvent();
-
-            Room Starter = new Room("Entrance Room", "empty", false, null, null, null, null);
-            Room room1 = new PuzzleRoom("Room 1", "puzzle", true, null, null, null, null);
-            Room room2 = new Room("Room 2", "puzzle", true, null, null, null, null);
-            Room room3 = new Room("Room 3", "empty", true, null, null, null, null);
-                            
-        
-
-        Enemy scavengerA = new Enemy("Scavenger grunt", 1, 30, 7);
-        Enemy scavengerB = new Enemy("Scavenger Brute", 2, 60, 10);
-        Enemy scavengerC = new Enemy("Scavenger Leader", 3, 100, 15);
-     
-        Enemy maelstromA = new Enemy("Maelstrom grunt", 1, 30, 7);
-        Enemy maelstromB = new Enemy("Maelstrom Brute", 2, 60, 10);
-        Enemy maelstromC = new Enemy("Maelstrom Leader", 3, 100, 15);
     
+    private static boolean finish = false;
+    public static Player player;
+    public static Weapon[] level2Weapons = {new Weapon("Liberty 9mm", 2, 20),
+                                            new Weapon("X-2 Kenshin 9mm", 2, 25),
+                                            new Weapon("Overture Revolver", 2, 30)
+                                            };
+    public static Weapon[] level3Weapons = {new Weapon("Mantis Blades", 3, 30),
+                                            new Weapon("Cyber Blade", 3, 35),
+                                            new Weapon("Militech Rasetsu .50", 3, 35)
+                                            };
+    
+        public static void main(String[] args) {
+    
+            RoomEvent event = new RoomEvent();
+            Weapon knife = new Weapon("Knife", 1, 10);    
+            Player player = new Player(null, 100, knife);
+            
 
-        Starter.setForwardRoom(room1); Starter.setLeftRoom(room2); Starter.setRightRoom(room3);
-        room1.setBackRoom(Starter);
-        
+    
+            Enemy scavengerA = new Enemy("Scavenger grunt", 1, 30, 7);
+            Enemy scavengerB = new Enemy("Scavenger Brute", 2, 60, 10);
+            Enemy scavengerC = new Enemy("Scavenger Leader", 3, 100, 15);
+         
+            Enemy maelstromA = new Enemy("Maelstrom grunt", 1, 30, 7);
+            Enemy maelstromB = new Enemy("Maelstrom Brute", 2, 60, 10);
+            Enemy maelstromC = new Enemy("Maelstrom Leader", 3, 100, 15);
+    
+            Room Starter = new Room("Entrance Room", 0, false, null, null, null, null, player);
+            Room room1 = new PuzzleRoom("Room 1", 1, true, null, null, null, null, player);
+            Room room2 = new BattleRoom("Room 2", 1, true, null, null, null, null, player, scavengerA);
+            Room room3 = new Room("Room 3", 1, true, null, null, null, null, player);
+    
+            Starter.setForwardRoom(room1); Starter.setLeftRoom(room2); Starter.setRightRoom(room3);
+            room1.setBackRoom(Starter);
+    
+            Scanner sc = new Scanner(System.in);
+            
+            
+            currentRoom = Starter;
+            
 
-        
-
-        Scanner sc = new Scanner(System.in);
-        
-        Player player = new Player(null, 100, 10);
-        currentRoom = Starter;
-
-        System.out.println("The year is 2133. Earth has fallen. Cities have been taken by surviving gangs and scavengers. Remaining civilian survivors must gather supplies to continue to survive. \n You turn on your issued surveying device... \n INPUT NAME ");
+        System.out.println("The year is 2133. Earth's governments have fallen. Cities have been taken by surviving gangs and scavengers. Remaining civilian survivors must gather supplies to continue to survive. \n You turn on your issued surveying device... \n INPUT NAME ");
         String input = sc.next();
         player.setName(input);
         System.out.println("GREETINGS, " + player.getName() + ". \nYOU ARE TASKED WITH SURVEYING [ABANDONED BUILDING 332K] FOR POTENTIAL RESOURCES AND SUPPLIES. \nDO NOT FAIL. YOUR COLONY DEPENDS ON YOU.");
-        moves move = new moves();
+        moves move = new moves(player);
         while(!finish){
 
             System.out.println("You stand in the " + currentRoom.getName() + ". ");
@@ -49,8 +57,9 @@ public class App {
             System.out.println("3 - Left");
             System.out.println("4 - Right");
             System.out.println("5 - Backward");
+            System.out.println("6 - Check Stats");
 
-            int input2 = Integer.parseInt(sc.next());;
+            int input2 = Integer.parseInt(sc.next());
 
             if (input2 == 1){
                 move.scanRoom();

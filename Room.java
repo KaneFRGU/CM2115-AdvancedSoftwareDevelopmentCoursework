@@ -1,20 +1,33 @@
 public class Room {
     private String name;
-    private String type;
+    protected int roomLevel;
     public boolean locked;
     public Room forwardRoom;
     public Room leftRoom;
     public Room rightRoom;
     public Room backRoom;
+    protected Player player;
 
-    public Room(String name, String type, boolean locked, Room forwardRoom, Room leftRoom, Room rightRoom, Room backRoom) {
+
+    public Room(String name, int roomLevel, boolean locked, Room forwardRoom, Room leftRoom, Room rightRoom,
+            Room backRoom, Player player) {
         this.name = name;
-        this.type = type;
+        this.roomLevel = roomLevel;
         this.locked = locked;
         this.forwardRoom = forwardRoom;
         this.leftRoom = leftRoom;
         this.rightRoom = rightRoom;
         this.backRoom = backRoom;
+        this.player = player;
+
+    }
+
+    public int getRoomLevel() {
+        return roomLevel;
+    }
+
+    public void setRoomLevel(int roomLevel) {
+        this.roomLevel = roomLevel;
     }
 
     public boolean isLocked() {
@@ -66,15 +79,6 @@ public class Room {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    
     public void accept(RoomEventVisitor visitor){
     }
 

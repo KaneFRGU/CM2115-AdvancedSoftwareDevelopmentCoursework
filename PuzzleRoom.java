@@ -5,8 +5,8 @@ public class PuzzleRoom extends Room implements IPuzzle{
     private int int2;
     private int int3;
     
-    public PuzzleRoom(String name, String type, boolean locked, Room forwardRoom, Room leftRoom, Room rightRoom, Room backRoom) {
-        super(name, type, locked, forwardRoom, leftRoom, rightRoom, backRoom);
+    public PuzzleRoom(String name, int roomLevel, boolean locked, Room forwardRoom, Room leftRoom, Room rightRoom, Room backRoom, Player player) {
+        super(name, roomLevel, locked, forwardRoom, leftRoom, rightRoom, backRoom, player);
     }
 
     @Override
@@ -15,24 +15,49 @@ public class PuzzleRoom extends Room implements IPuzzle{
     }
 
     public void showPuzzle(){
+        System.out.println("The room is filled with strange contraptions. Investigate?");
+        System.out.println("1 - Yes");
+        System.out.println("2 - No");
         Scanner sc = new Scanner(System.in);
-        int1 = (int)(Math.random() * (100 - 1)) + 1;
-        int2 = (int)(Math.random() * (100 - 1)) + 1;
-        int3 = int1 + int2;
-        System.out.println("A command screen flashes open. The text reads:");
-        System.out.println("What is " + int1 + " + " + int2 + "?");
         int input = sc.nextInt();
-        
-        if(input == int3){
-            System.out.println("The screen flashes green and you hear the door unlock!");
-            App.currentRoom.locked = false;
+
+        if(input == 1){
+            int1 = (int)(Math.random() * (100 - 1)) + 1;
+            int2 = (int)(Math.random() * (100 - 1)) + 1;
+            int3 = int1 + int2;
+            System.out.println("A command screen flashes open. The text reads:");
+            System.out.println("What is " + int1 + " + " + int2 + "?");
+            int input2 = sc.nextInt();
+            
+            if(input2 == int3){
+                System.out.println("The screen flashes green and you hear the door unlock!");
+                App.currentRoom.locked = false;
+                prize();
+
+            }
+            else{
+                System.out.println("Wrong! The contraption shocks you!");
+                player.health -= 10;
+            }
         }
-        else{
-            System.out.println("Wrong! The contraption shocks you!");
-            int health = App.player.getHealth();
-            health -= 10;
-            App.player.setHealth(health);
-        }   
-        sc.close();
+           
+    }
+
+    public void prize(){
+        System.out.println("You hear a click come from a locked drawer. The drawer opens!");
+        if (roomLevel == 1){
+            int prizeNo = (int)(Math.random() * (2 - 0));
+            player.setWeapon(App.level3Weapons[prizeNo]);
+            System.out.println("You got the " + player.getWeapon().getName() + "!");
+            System.out.println("Yoo also found medicine. +20HP");
+            player.health += 20;
+        }
+        else if (roomLevel == 2){
+            int prizeNo = (int)(Math.random() * (2 - 0));
+            player.setWeapon(App.level3Weapons[prizeNo]);
+            System.out.println("You got the " + player.getWeapon().getName() + "!");
+            System.out.println("Yoo also found medicine. +20HP");
+            player.health += 20;
+        }
     }
 }

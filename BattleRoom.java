@@ -1,10 +1,12 @@
+import java.util.Scanner;
+
 public class BattleRoom extends Room implements IBattle {
 
     private Enemy enemy;
     
-    public BattleRoom(String name, String type, boolean locked, Room forwardRoom, Room leftRoom, Room rightRoom,
-            Room backRoom, Enemy enemy) {
-        super(name, type, locked, forwardRoom, leftRoom, rightRoom, backRoom);
+    public BattleRoom(String name, int roomLevel, boolean locked, Room forwardRoom, Room leftRoom, Room rightRoom,
+            Room backRoom, Player player, Enemy enemy) {
+        super(name, roomLevel, locked, forwardRoom, leftRoom, rightRoom, backRoom, player);
         this.enemy = enemy;
     }
 
@@ -14,7 +16,17 @@ public class BattleRoom extends Room implements IBattle {
     }
 
     public void showBattle(){
-        System.out.println("");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("They must've heard you! A " + enemy.getName() + " Jumps out and attacks!!");
+        System.out.println("What do you do?");
+        System.out.println("1 - ATTACK ROLL");
+        System.out.println("2 - CHECK STATS");
+        int input = sc.nextInt();
+
+        if(input == 2){
+            System.out.println("NAME: " + player.getName());
+        }
+
     }
 
 
