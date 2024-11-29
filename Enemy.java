@@ -37,11 +37,4 @@ public class Enemy {
         this.damage = damage;
     }
 
-    public void Attack(){
-        System.out.println("The " + name + " attacks you!");
-        int health = App.player.getHealth();
-        health -= damage;
-        App.player.setHealth(health);
-    }
-
 }

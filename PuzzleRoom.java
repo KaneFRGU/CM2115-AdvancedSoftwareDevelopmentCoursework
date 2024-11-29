@@ -31,7 +31,7 @@ public class PuzzleRoom extends Room implements IPuzzle{
             
             if(input2 == int3){
                 System.out.println("The screen flashes green and you hear the door unlock!");
-                App.currentRoom.locked = false;
+                App.currentRoom.setLocked(false);
                 prize();
 
             }
@@ -44,18 +44,39 @@ public class PuzzleRoom extends Room implements IPuzzle{
     }
 
     public void prize(){
+        Scanner sc = new Scanner(System.in);
         System.out.println("You hear a click come from a locked drawer. The drawer opens!");
         if (roomLevel == 1){
             int prizeNo = (int)(Math.random() * (2 - 0));
-            player.setWeapon(App.level3Weapons[prizeNo]);
-            System.out.println("You got the " + player.getWeapon().getName() + "!");
+            Weapon newWeapon = App.level3Weapons[prizeNo];
+            System.out.println("You got the " + newWeapon.getName() + "! Take it?");
+            System.out.println("1 - YES");
+            System.out.println("2 - NO");
+            int input = sc.nextInt();
+            if (input == 1){
+                System.out.println("You take the " + newWeapon.getName() + ".");
+                player.setWeapon(newWeapon);
+            }
+            if(input == 2){
+                System.out.println("You leave the " + newWeapon.getName() + ".");
+            }
             System.out.println("Yoo also found medicine. +20HP");
             player.health += 20;
         }
         else if (roomLevel == 2){
             int prizeNo = (int)(Math.random() * (2 - 0));
-            player.setWeapon(App.level3Weapons[prizeNo]);
-            System.out.println("You got the " + player.getWeapon().getName() + "!");
+            Weapon newWeapon = App.level3Weapons[prizeNo];
+            System.out.println("You got the " + newWeapon.getName() + "! Take it?");
+            System.out.println("1 - YES");
+            System.out.println("2 - NO");
+            int input = sc.nextInt();
+            if (input == 1){
+                System.out.println("You take the " + newWeapon.getName() + ".");
+                player.setWeapon(newWeapon);
+            }
+            if(input == 2){
+                System.out.println("You leave the " + newWeapon.getName() + ".");
+            }
             System.out.println("Yoo also found medicine. +20HP");
             player.health += 20;
         }

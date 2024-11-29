@@ -16,18 +16,84 @@ public class BattleRoom extends Room implements IBattle {
     }
 
     public void showBattle(){
+        System.out.println("You can hear noises coming from behind a wall. Investigate?");
+        System.out.println("1 - Yes");
+        System.out.println("2 - No");
         Scanner sc = new Scanner(System.in);
-        System.out.println("They must've heard you! A " + enemy.getName() + " Jumps out and attacks!!");
-        System.out.println("What do you do?");
-        System.out.println("1 - ATTACK ROLL");
-        System.out.println("2 - CHECK STATS");
         int input = sc.nextInt();
 
-        if(input == 2){
-            System.out.println("NAME: " + player.getName());
+        if(input == 1){
+            boolean battle = true;
+
+            System.out.println("They must've heard you! A " + enemy.getName() + " Jumps out and attacks!!");
+
+            while(battle){
+                System.out.println("What do you do?");
+                System.out.println("1 - ATTACK ROLL");
+                System.out.println("2 - CHECK STATS");
+                int input2 = sc.nextInt();
+
+                if(input2 == 1){
+                    int damage = (int)(Math.random() * (player.getWeapon().getDamage() - player.getWeapon().getDamage()/2)) + player.getWeapon().getDamage()/2;
+                    System.out.println("You attack using your " + player.getWeapon().getName() + "!");
+                    System.out.println(enemy.getName() + " takes -" + damage + "!");
+                    enemy.setHealth(enemy.getHealth() - damage);
+                }
+
+                else if(input2 == 2){
+                    System.out.println("NAME: " + player.getName());
+                }
+                if (enemy.getHealth() > 0){
+                    System.out.println("The " + enemy.getName() + " attacks you!");
+                    int enemyDamage = (int)(Math.random() * (enemy.getDamage() - enemy.getDamage()/2)) + enemy.getDamage()/2;
+                    player.health -= enemyDamage;
+                    System.out.println("You take -" + enemyDamage + " damage!");
+                }
+                else{
+                    System.out.println("The " + enemy.getName() + " perishes! You won!");
+                    System.out.println("The enemy drops their weapon!");
+                    if (roomLevel == 1){
+                        int prizeNo = (int)(Math.random() * (2 - 0));
+                        Weapon newWeapon = App.level3Weapons[prizeNo];
+                        System.out.println("You got the " + newWeapon.getName() + "! Take it?");
+                        System.out.println("1 - YES");
+                        System.out.println("2 - NO");
+                        int input3 = sc.nextInt();
+                        if (input3 == 1){
+                            System.out.println("You take the " + newWeapon.getName() + ".");
+                            player.setWeapon(newWeapon);
+                        }
+                        if(input3 == 2){
+                            System.out.println("You leave the " + newWeapon.getName() + ".");
+                        }
+                        System.out.println("Yoo also found medicine. +20HP");
+                        player.health += 20;
+                    }
+                    else if (roomLevel == 2){
+                        int prizeNo = (int)(Math.random() * (2 - 0));
+                        Weapon newWeapon = App.level3Weapons[prizeNo];
+                        System.out.println("You got the " + newWeapon.getName() + "! Take it?");
+                        System.out.println("1 - YES");
+                        System.out.println("2 - NO");
+                        int input3 = sc.nextInt();
+                        if (input3 == 1){
+                            System.out.println("You take the " + newWeapon.getName() + ".");
+                            player.setWeapon(newWeapon);
+                        }
+                        if(input3 == 2){
+                            System.out.println("You leave the " + newWeapon.getName() + ".");
+                        }
+                        System.out.println("Yoo also found medicine. +20HP");
+                        player.health += 20;
+                    }
+                    battle = false;
+                    App.currentRoom.setLocked(false);
+                }
+
+                
+
+                
+            }
         }
-
     }
-
-
 }

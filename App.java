@@ -19,9 +19,7 @@ public class App {
             RoomEvent event = new RoomEvent();
             Weapon knife = new Weapon("Knife", 1, 10);    
             Player player = new Player(null, 100, knife);
-            
 
-    
             Enemy scavengerA = new Enemy("Scavenger grunt", 1, 30, 7);
             Enemy scavengerB = new Enemy("Scavenger Brute", 2, 60, 10);
             Enemy scavengerC = new Enemy("Scavenger Leader", 3, 100, 15);
@@ -30,13 +28,15 @@ public class App {
             Enemy maelstromB = new Enemy("Maelstrom Brute", 2, 60, 10);
             Enemy maelstromC = new Enemy("Maelstrom Leader", 3, 100, 15);
     
-            Room Starter = new Room("Entrance Room", 0, false, null, null, null, null, player);
+            Room Starter = new PuzzleRoom("Entrance Room", 1, false, null, null, null, null, player);
             Room room1 = new PuzzleRoom("Room 1", 1, true, null, null, null, null, player);
             Room room2 = new BattleRoom("Room 2", 1, true, null, null, null, null, player, scavengerA);
-            Room room3 = new Room("Room 3", 1, true, null, null, null, null, player);
+            Room room3 = new BattleRoom("Room 3", 1, true, null, null, null, null, player, maelstromA);
     
             Starter.setForwardRoom(room1); Starter.setLeftRoom(room2); Starter.setRightRoom(room3);
-            room1.setBackRoom(Starter);
+            room1.setBackRoom(Starter); 
+            room2.setRightRoom(Starter);
+            room3.setLeftRoom(Starter);
     
             Scanner sc = new Scanner(System.in);
             
@@ -51,6 +51,9 @@ public class App {
         moves move = new moves(player);
         while(!finish){
 
+            if(player.getHealth() > 100){
+                player.health = 100;
+            }
             System.out.println("You stand in the " + currentRoom.getName() + ". ");
             System.out.println("1 - Scan");
             System.out.println("2 - Forward");

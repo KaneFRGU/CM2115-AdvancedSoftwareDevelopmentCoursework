@@ -1,11 +1,11 @@
-public class Room {
+public abstract class Room {
     private String name;
     protected int roomLevel;
-    public boolean locked;
-    public Room forwardRoom;
-    public Room leftRoom;
-    public Room rightRoom;
-    public Room backRoom;
+    private boolean locked;
+    private  Room forwardRoom;
+    private Room leftRoom;
+    private Room rightRoom;
+    private Room backRoom;
     protected Player player;
 
 

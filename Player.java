@@ -27,5 +27,4 @@ public class Player {
     }
     public static void setHealth(int health) {
     }
-
 }
