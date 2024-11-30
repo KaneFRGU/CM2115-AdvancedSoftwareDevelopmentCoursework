@@ -1,6 +1,12 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.*;
 
 public class App {
@@ -8,6 +14,7 @@ public class App {
     
     static boolean finish = false;
     public static Player player;
+
     public static Weapon[] level2Weapons = {new Weapon("Liberty 9mm", 2, 20),
                                             new Weapon("X-2 Kenshin 9mm", 2, 25),
                                             new Weapon("Overture Revolver", 2, 30)
@@ -18,6 +25,32 @@ public class App {
                                             };
     
         public static void main(String[] args) {
+            //shows highscore
+            try {
+                File file = new File("score.txt");
+                Scanner sc = new Scanner(file);
+                
+                while(sc.hasNextLine()) {
+                String line = sc.nextLine();
+                String[] nums = line.split(", ");
+                
+                int highScore = 0;
+                int highscorenumber = 0;
+
+                for(int i = 0; i < nums.length; ++i) {
+                    int score = ((Number)NumberFormat.getInstance().parse(nums[i])).intValue();
+
+                    if(score > highScore){
+                        highScore = score;
+                        highscorenumber = i;
+                    }
+                }
+                System.out.println("HIGH SCORE: " + nums[highscorenumber].replaceAll("[0-9]", "") + " - " + highScore);
+                }
+            } catch (FileNotFoundException | ParseException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
     
             RoomEvent event = new RoomEvent();
             Weapon knife = new Weapon("Knife", 1, 10);    
@@ -69,52 +102,10 @@ public class App {
         System.out.println("GREETINGS, " + player.getName() + ". \nYOU ARE TASKED WITH SURVEYING [ABANDONED BUILDING 332K] FOR POTENTIAL RESOURCES AND SUPPLIES. \nDO NOT FAIL. YOUR COLONY DEPENDS ON YOU.");
         moves move = new moves(player);
         while(!finish){
-
-            if(player.getHealth() > 100){
-                player.health = 100;
-            }
-            System.out.println("You stand in the " + currentRoom.getName() + ". ");
-            
-            System.out.println("1 - Scan");
-            if(currentRoom.getForwardRoom() != null){
-                System.out.println("2 - Forward");
-            }
-            if(currentRoom.getLeftRoom() != null){
-                System.out.println("3 - Left");
-            }
-            if(currentRoom.getRightRoom() != null){
-                System.out.println("4 - Right");
-            }
-            if(currentRoom.getBackRoom() != null){
-                System.out.println("5 - Backward");
-            }
-            System.out.println("6 - Check Stats");
-
-            int input2 = Integer.parseInt(sc.next());
-
-            if (input2 == 1){
-                move.scanRoom();
-            }
-            else if(input2 == 2){
-                move.moveForward();
-            }
-            else if(input2 == 3){
-                move.moveLeft();
-            }
-            else if(input2 == 4){
-                move.moveRight();
-            }
-            else if(input2 == 5){
-                move.moveBackward();
-            }
-            else if(input2 == 6){
-                move.checkStats();
-            }
+            move.moveset();
         }
         try {
-            FileWriter writer = new FileWriter("score.txt");
-            writer.write(player.getName() + ", " +  player.score);
-            writer.close();
+            Files.write(Paths.get("score.txt"), (", " + player.getScore() + player.getName()).getBytes(), StandardOpenOption.APPEND);
         } 
         catch (IOException e) {
             System.out.println("An error occurred when writing to file.");
