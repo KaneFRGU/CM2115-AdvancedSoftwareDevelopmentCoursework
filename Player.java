@@ -4,7 +4,9 @@ public class Player {
     private String name;
     public int health;
     private Weapon weapon;
+    int score;
 
+    
     public Player(String name, int health, Weapon weapon) {
         this.name = name;
         this.health = health;
@@ -26,5 +28,11 @@ public class Player {
         return health;
     }
     public static void setHealth(int health) {
+    }
+    public int getScore() {
+        return score;
+    }
+    public void setScore(int score) {
+        this.score = score;
     }
 }

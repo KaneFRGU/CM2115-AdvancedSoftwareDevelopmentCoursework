@@ -1,9 +1,12 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class App {
     public static Room currentRoom;
     
-    private static boolean finish = false;
+    static boolean finish = false;
     public static Player player;
     public static Weapon[] level2Weapons = {new Weapon("Liberty 9mm", 2, 20),
                                             new Weapon("X-2 Kenshin 9mm", 2, 25),
@@ -29,14 +32,30 @@ public class App {
             Enemy maelstromC = new Enemy("Maelstrom Leader", 3, 100, 15);
     
             Room Starter = new PuzzleRoom("Entrance Room", 1, false, null, null, null, null, player);
-            Room room1 = new PuzzleRoom("Room 1", 1, true, null, null, null, null, player);
-            Room room2 = new BattleRoom("Room 2", 1, true, null, null, null, null, player, scavengerA);
-            Room room3 = new BattleRoom("Room 3", 1, true, null, null, null, null, player, maelstromA);
+            Room room1 = new PuzzleRoom("Server Room", 1, true, null, null, null, null, player);
+            Room room2 = new BattleRoom("Office block", 1, true, null, null, null, null, player, scavengerA);
+            Room room3 = new BattleRoom("Lab", 1, true, null, null, null, null, player, maelstromA);
+            
+            Room room1_1 = new BattleRoom("Lab", 2, true, null, null, null, null, player, maelstromB);
+            Room room1_2 = new UltimateRoom("Engineer's bay", 3, true, null, null, null, null, player, maelstromC);
+            Room room2_1 = new PuzzleRoom("Manager's Office", 2, true, null, null, null, null, player);
+            Room room2_2 = new UltimateRoom("Engineer's Lockup", 3, true, null, null, null, null, player, scavengerC);
+            Room room3_1 = new PuzzleRoom("Lab Storage", 2, true, null, null, null, null, player);
+            Room room3_2 = new BattleRoom("Factory Floor", 3, true, null, null, null, null, player, scavengerB);
+            Room room3_3 = new UltimateRoom("Lab Lockup", 3, true, null, null, null, null, player, scavengerC);
+            
     
             Starter.setForwardRoom(room1); Starter.setLeftRoom(room2); Starter.setRightRoom(room3);
-            room1.setBackRoom(Starter); 
-            room2.setRightRoom(Starter);
-            room3.setLeftRoom(Starter);
+            room1.setBackRoom(Starter); room1.setForwardRoom(room1_1);
+            room2.setRightRoom(Starter); room2.setForwardRoom(room2_1);
+            room3.setLeftRoom(Starter); room3.setForwardRoom(room3_1);
+
+            room1_1.setForwardRoom(room1_2); room1_1.setBackRoom(room1);
+            room2_1.setForwardRoom(room2_2); room2_1.setBackRoom(room2);
+            room3_1.setForwardRoom(room3_2); room3_1.setBackRoom(room3);
+
+            room3_2.setForwardRoom(room3_3); room3_2.setBackRoom(room3_1);
+
     
             Scanner sc = new Scanner(System.in);
             
@@ -55,11 +74,20 @@ public class App {
                 player.health = 100;
             }
             System.out.println("You stand in the " + currentRoom.getName() + ". ");
+            
             System.out.println("1 - Scan");
-            System.out.println("2 - Forward");
-            System.out.println("3 - Left");
-            System.out.println("4 - Right");
-            System.out.println("5 - Backward");
+            if(currentRoom.getForwardRoom() != null){
+                System.out.println("2 - Forward");
+            }
+            if(currentRoom.getLeftRoom() != null){
+                System.out.println("3 - Left");
+            }
+            if(currentRoom.getRightRoom() != null){
+                System.out.println("4 - Right");
+            }
+            if(currentRoom.getBackRoom() != null){
+                System.out.println("5 - Backward");
+            }
             System.out.println("6 - Check Stats");
 
             int input2 = Integer.parseInt(sc.next());
@@ -82,6 +110,15 @@ public class App {
             else if(input2 == 6){
                 move.checkStats();
             }
+        }
+        try {
+            FileWriter writer = new FileWriter("score.txt");
+            writer.write(player.getName() + ", " +  player.score);
+            writer.close();
+        } 
+        catch (IOException e) {
+            System.out.println("An error occurred when writing to file.");
+            e.printStackTrace();
         }
     }
 }

@@ -4,8 +4,7 @@ public class BattleRoom extends Room implements IBattle {
 
     private Enemy enemy;
     
-    public BattleRoom(String name, int roomLevel, boolean locked, Room forwardRoom, Room leftRoom, Room rightRoom,
-            Room backRoom, Player player, Enemy enemy) {
+    public BattleRoom(String name, int roomLevel, boolean locked, Room forwardRoom, Room leftRoom, Room rightRoom, Room backRoom, Player player, Enemy enemy) {
         super(name, roomLevel, locked, forwardRoom, leftRoom, rightRoom, backRoom, player);
         this.enemy = enemy;
     }
@@ -54,7 +53,7 @@ public class BattleRoom extends Room implements IBattle {
                     System.out.println("The enemy drops their weapon!");
                     if (roomLevel == 1){
                         int prizeNo = (int)(Math.random() * (2 - 0));
-                        Weapon newWeapon = App.level3Weapons[prizeNo];
+                        Weapon newWeapon = App.level2Weapons[prizeNo];
                         System.out.println("You got the " + newWeapon.getName() + "! Take it?");
                         System.out.println("1 - YES");
                         System.out.println("2 - NO");
@@ -66,7 +65,9 @@ public class BattleRoom extends Room implements IBattle {
                         if(input3 == 2){
                             System.out.println("You leave the " + newWeapon.getName() + ".");
                         }
-                        System.out.println("Yoo also found medicine. +20HP");
+                        System.out.println("Yoo also found medicine. +20HP +1000 SCORE");
+                        player.score += 1000;
+                        
                         player.health += 20;
                     }
                     else if (roomLevel == 2){
@@ -83,7 +84,8 @@ public class BattleRoom extends Room implements IBattle {
                         if(input3 == 2){
                             System.out.println("You leave the " + newWeapon.getName() + ".");
                         }
-                        System.out.println("Yoo also found medicine. +20HP");
+                        System.out.println("Yoo also found medicine. +20HP +2000 SCORE");
+                        player.score += 1000;
                         player.health += 20;
                     }
                     battle = false;
@@ -94,6 +96,45 @@ public class BattleRoom extends Room implements IBattle {
 
                 
             }
+        }
+    }
+
+    public void prize(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("You hear a click come from a locked drawer. The drawer opens!");
+        if (roomLevel == 1){
+            int prizeNo = (int)(Math.random() * (2 - 0));
+            Weapon newWeapon = App.level3Weapons[prizeNo];
+            System.out.println("You got the " + newWeapon.getName() + "! Take it?");
+            System.out.println("1 - YES");
+            System.out.println("2 - NO");
+            int input = sc.nextInt();
+            if (input == 1){
+                System.out.println("You take the " + newWeapon.getName() + ".");
+                player.setWeapon(newWeapon);
+            }
+            if(input == 2){
+                System.out.println("You leave the " + newWeapon.getName() + ".");
+            }
+            System.out.println("Yoo also found medicine. +20HP");
+            player.health += 20;
+        }
+        else if (roomLevel == 2){
+            int prizeNo = (int)(Math.random() * (2 - 0));
+            Weapon newWeapon = App.level3Weapons[prizeNo];
+            System.out.println("You got the " + newWeapon.getName() + "! Take it?");
+            System.out.println("1 - YES");
+            System.out.println("2 - NO");
+            int input = sc.nextInt();
+            if (input == 1){
+                System.out.println("You take the " + newWeapon.getName() + ".");
+                player.setWeapon(newWeapon);
+            }
+            if(input == 2){
+                System.out.println("You leave the " + newWeapon.getName() + ".");
+            }
+            System.out.println("Yoo also found medicine. +20HP");
+            player.health += 20;
         }
     }
 }

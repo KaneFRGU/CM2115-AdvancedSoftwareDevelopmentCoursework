@@ -48,7 +48,7 @@ public class PuzzleRoom extends Room implements IPuzzle{
         System.out.println("You hear a click come from a locked drawer. The drawer opens!");
         if (roomLevel == 1){
             int prizeNo = (int)(Math.random() * (2 - 0));
-            Weapon newWeapon = App.level3Weapons[prizeNo];
+            Weapon newWeapon = App.level2Weapons[prizeNo];
             System.out.println("You got the " + newWeapon.getName() + "! Take it?");
             System.out.println("1 - YES");
             System.out.println("2 - NO");
@@ -60,8 +60,9 @@ public class PuzzleRoom extends Room implements IPuzzle{
             if(input == 2){
                 System.out.println("You leave the " + newWeapon.getName() + ".");
             }
-            System.out.println("Yoo also found medicine. +20HP");
+            System.out.println("Yoo also found medicine. +20HP +1000 SCORE");
             player.health += 20;
+            player.score += 1000;
         }
         else if (roomLevel == 2){
             int prizeNo = (int)(Math.random() * (2 - 0));
@@ -77,7 +78,9 @@ public class PuzzleRoom extends Room implements IPuzzle{
             if(input == 2){
                 System.out.println("You leave the " + newWeapon.getName() + ".");
             }
-            System.out.println("Yoo also found medicine. +20HP");
+            System.out.println("Yoo also found medicine. +20HP +2000 SCORE");
+            
+            player.score += 2000;
             player.health += 20;
         }
     }

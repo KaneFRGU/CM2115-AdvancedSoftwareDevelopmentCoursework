@@ -9,4 +9,9 @@ public class RoomEvent implements RoomEventVisitor {
         battleRoom.showBattle();
     }
 
+    public void visit(UltimateRoom ultimateRoom){
+        ultimateRoom.showPuzzle();
+        ultimateRoom.showBattle();
+    }
+
 }
