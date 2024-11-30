@@ -48,6 +48,14 @@ public class BattleRoom extends Room implements IBattle {
 
                 else if(input2 == 2){
                     System.out.println("NAME: " + player.getName());
+                    System.out.println("HEALTH: " + player.getHealth());
+                    System.out.println("WEAPON: " + player.getWeapon().getName());
+                    System.out.println("LEVEL: " + player.getWeapon().getLevel());
+                    System.out.println("DAMAGE: " + player.getWeapon().getDamage());
+                    System.out.println("=======================================");
+                    System.out.println("ENEMY NAME: " + enemy.getName());
+                    System.out.println("ENEMY HEALTH: " + enemy.getHealth());
+                    System.out.println("ENEMY DAMAGE: " + enemy.getDamage());
                 }
                 if (enemy.getHealth() > 0){
                     System.out.println("The " + enemy.getName() + " attacks you!");
@@ -96,51 +104,8 @@ public class BattleRoom extends Room implements IBattle {
                     }
                     battle = false;
                     App.currentRoom.setLocked(false);
-                }
-
-                
-
-                
+                } 
             }
-        }
-    }
-
-    public void prize(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("You hear a click come from a locked drawer. The drawer opens!");
-        if (roomLevel == 1){
-            int prizeNo = (int)(Math.random() * (2 - 0));
-            Weapon newWeapon = App.level3Weapons[prizeNo];
-            System.out.println("You got the " + newWeapon.getName() + "! Take it?");
-            System.out.println("1 - YES");
-            System.out.println("2 - NO");
-            int input = sc.nextInt();
-            if (input == 1){
-                System.out.println("You take the " + newWeapon.getName() + ".");
-                player.setWeapon(newWeapon);
-            }
-            if(input == 2){
-                System.out.println("You leave the " + newWeapon.getName() + ".");
-            }
-            System.out.println("Yoo also found medicine. +20HP");
-            player.health += 20;
-        }
-        else if (roomLevel == 2){
-            int prizeNo = (int)(Math.random() * (2 - 0));
-            Weapon newWeapon = App.level3Weapons[prizeNo];
-            System.out.println("You got the " + newWeapon.getName() + "! Take it?");
-            System.out.println("1 - YES");
-            System.out.println("2 - NO");
-            int input = sc.nextInt();
-            if (input == 1){
-                System.out.println("You take the " + newWeapon.getName() + ".");
-                player.setWeapon(newWeapon);
-            }
-            if(input == 2){
-                System.out.println("You leave the " + newWeapon.getName() + ".");
-            }
-            System.out.println("Yoo also found medicine. +20HP");
-            player.health += 20;
         }
     }
 }

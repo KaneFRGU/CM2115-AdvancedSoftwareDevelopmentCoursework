@@ -61,23 +61,23 @@ public class App {
             Weapon knife = new Weapon("Knife", 1, 10);    
             Player player = Player.getInstance(null, 100, knife);
 
-            Enemy scavengerA = new Enemy("Scavenger grunt", 1, 30, 7);
-            Enemy scavengerB = new Enemy("Scavenger Brute", 2, 60, 10);
-            Enemy scavengerC = new Enemy("Scavenger Leader", 3, 100, 15);
+            Enemy scavengerA = new Enemy("Scavenger grunt", 1, 30, 10);
+            Enemy scavengerB = new Enemy("Scavenger Brute", 2, 60, 20);
+            Enemy scavengerC = new Enemy("Scavenger Leader", 3, 100, 25);
          
-            Enemy maelstromA = new Enemy("Maelstrom grunt", 1, 30, 7);
+            Enemy maelstromA = new Enemy("Maelstrom grunt", 1, 30, 10);
             Enemy maelstromB = new Enemy("Maelstrom Brute", 2, 60, 10);
-            Enemy maelstromC = new Enemy("Maelstrom Leader", 3, 100, 15);
+            Enemy maelstromC = new Enemy("Maelstrom Leader", 3, 100, 25);
     
             //connected rooms set to null when rooms are initialized so the rooms that are to be connected actually exist.
             Room Starter = new PuzzleRoom("Entrance Room", 1, false, null, null, null, null, player);
             Room room1 = new PuzzleRoom("Server Room", 1, true, null, null, null, null, player);
             Room room2 = new BattleRoom("Office block", 1, true, null, null, null, null, player, scavengerA);
             Room room3 = new BattleRoom("Lab", 1, true, null, null, null, null, player, maelstromA);
-            Room room1_1 = new BattleRoom("Lab", 2, true, null, null, null, null, player, maelstromB);
-            Room room1_2 = new UltimateRoom("Engineer's bay", 3, true, null, null, null, null, player, maelstromC);
+            Room room1_1 = new BattleRoom("Engineering bay", 2, true, null, null, null, null, player, maelstromB);
+            Room room1_2 = new UltimateRoom("Engineer's Lockup", 3, true, null, null, null, null, player, maelstromC);
             Room room2_1 = new PuzzleRoom("Manager's Office", 2, true, null, null, null, null, player);
-            Room room2_2 = new UltimateRoom("Engineer's Lockup", 3, true, null, null, null, null, player, scavengerC);
+            Room room2_2 = new UltimateRoom("Safe room", 3, true, null, null, null, null, player, scavengerC);
             Room room3_1 = new PuzzleRoom("Lab Storage", 2, true, null, null, null, null, player);
             Room room3_2 = new BattleRoom("Factory Floor", 3, true, null, null, null, null, player, scavengerB);
             Room room3_3 = new UltimateRoom("Lab Lockup", 3, true, null, null, null, null, player, scavengerC);
@@ -103,11 +103,12 @@ public class App {
         player.setName(input);
         System.out.println("GREETINGS, " + player.getName() + ". \nYOU ARE TASKED WITH SURVEYING [ABANDONED BUILDING 332K] FOR POTENTIAL RESOURCES AND SUPPLIES. \nDO NOT FAIL. YOUR COLONY DEPENDS ON YOU.");
         moves move = new moves(player);
+
         while(!finish){
             move.moveset();
         }
 
-        //writes score to file
+        //writes score to score.txt file
         try {
             Files.write(Paths.get("score.txt"), (", " + player.getScore() + player.getName()).getBytes(), StandardOpenOption.APPEND);
         } 
