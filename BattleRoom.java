@@ -58,7 +58,7 @@ public class BattleRoom extends Room implements IBattle {
                     System.out.println("The " + enemy.getName() + " perishes! You won!");
                     System.out.println("The enemy drops their weapon!");
                     if (roomLevel == 1){
-                        int prizeNo = (int)(Math.random() * (2 - 0));
+                        int prizeNo = (int)(Math.random() * (2 - 0)); //chooses a random prize from 3 options
                         Weapon newWeapon = App.level2Weapons[prizeNo];
                         System.out.println("You got the " + newWeapon.getName() + "! Take it?");
                         System.out.println("1 - YES");
@@ -73,11 +73,10 @@ public class BattleRoom extends Room implements IBattle {
                         }
                         System.out.println("Yoo also found medicine. +20HP +1000 SCORE");
                         player.score += 1000;
-                        
                         player.health += 20;
                     }
                     else if (roomLevel == 2){
-                        int prizeNo = (int)(Math.random() * (2 - 0));
+                        int prizeNo = (int)(Math.random() * (2 - 0)); //chooses a random prize from 3 options
                         Weapon newWeapon = App.level3Weapons[prizeNo];
                         System.out.println("You got the " + newWeapon.getName() + "! Take it?");
                         System.out.println("1 - YES");
