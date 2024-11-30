@@ -56,6 +56,13 @@ public class UltimateRoom extends Room implements IBattle, IPuzzle {
         System.out.println("A " + enemy.getName() + " Bursts through the door and attacks!");
 
         while(battle){
+            
+            if(player.getHealth() <= 0){
+                System.out.println("YOU DIED");
+                System.out.println("GAME OVER");
+                App.finish = true;
+                break;
+            }
 
             System.out.println("What do you do?");
             System.out.println("1 - ATTACK ROLL");

@@ -27,6 +27,12 @@ public class BattleRoom extends Room implements IBattle {
             System.out.println("They must've heard you! A " + enemy.getName() + " Jumps out and attacks!!");
 
             while(battle){
+                if(player.getHealth() <= 0){
+                    System.out.println("YOU DIED");
+                    System.out.println("GAME OVER");
+                    App.finish = true;
+                    break;
+                }
                 System.out.println("What do you do?");
                 System.out.println("1 - ATTACK ROLL");
                 System.out.println("2 - CHECK STATS");

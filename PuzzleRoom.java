@@ -15,6 +15,7 @@ public class PuzzleRoom extends Room implements IPuzzle{
     }
 
     public void showPuzzle(){
+        
         System.out.println("The room is filled with strange contraptions. Investigate?");
         System.out.println("1 - Yes");
         System.out.println("2 - No");
@@ -39,6 +40,11 @@ public class PuzzleRoom extends Room implements IPuzzle{
                 System.out.println("Wrong! The contraption shocks you!");
                 player.health -= 10;
             }
+        }
+        if(player.getHealth() <= 0){
+            System.out.println("YOU DIED");
+            System.out.println("GAME OVER");
+            App.finish = true;
         }
            
     }
