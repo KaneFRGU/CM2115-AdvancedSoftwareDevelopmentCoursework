@@ -13,7 +13,8 @@ public class BattleRoom extends Room implements IBattle {
     public void accept(RoomEventVisitor visitor){
         visitor.visit(this);
     }
-
+    
+    @Override
     public void showBattle(){
         System.out.println("You can hear noises coming from behind a wall. Investigate?");
         System.out.println("1 - Yes");

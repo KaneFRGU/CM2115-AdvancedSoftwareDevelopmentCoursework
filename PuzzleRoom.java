@@ -14,6 +14,7 @@ public class PuzzleRoom extends Room implements IPuzzle{
         visitor.visit(this);
     }
 
+    @Override
     public void showPuzzle(){
         
         System.out.println("The room is filled with strange contraptions. Investigate?");
