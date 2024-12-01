@@ -54,7 +54,7 @@ public class PuzzleRoom extends Room implements IPuzzle{
         Scanner sc = new Scanner(System.in);
         System.out.println("You hear a click come from a locked drawer. The drawer opens!");
         if (roomLevel == 1){
-            int prizeNo = (int)(Math.random() * (3 - 0));
+            int prizeNo = (int)(Math.random() * (3));
             Weapon newWeapon = App.level2Weapons[prizeNo];
             System.out.println("You got the " + newWeapon.getName() + "! Take it?");
             System.out.println("1 - YES");
@@ -72,7 +72,7 @@ public class PuzzleRoom extends Room implements IPuzzle{
             player.score += 1000;
         }
         else if (roomLevel == 2){
-            int prizeNo = (int)(Math.random() * (3 - 0));
+            int prizeNo = (int)(Math.random() * (3));
             Weapon newWeapon = App.level3Weapons[prizeNo];
             System.out.println("You got the " + newWeapon.getName() + "! Take it?");
             System.out.println("1 - YES");
