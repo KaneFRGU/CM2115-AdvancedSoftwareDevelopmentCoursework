@@ -21,8 +21,8 @@ public class App {
                                             new Weapon("Overture Revolver", 2, 30)
                                             };
     public static Weapon[] level3Weapons = {new Weapon("Mantis Blades", 3, 30),
-                                            new Weapon("Cyber Blade", 3, 35),
-                                            new Weapon("Militech Rasetsu .50", 3, 35)
+                                            new Weapon("Militech Rasetsu .50", 3, 35),
+                                            new Weapon("E-9 Cynosure Erebus", 3, 35)
                                             };
     
         public static void main(String[] args) {
