@@ -4,16 +4,7 @@ public class Player {
     private Weapon weapon;
     int score;
 
-    private static Player instance = null;
-    
-    public static final Player getInstance(String name, int health, Weapon weapon){
-        if(instance == null){
-            instance = new Player(name, health, weapon);
-        }
-        return instance;
-    }
-
-    private Player(String name, int health, Weapon weapon) {
+    public Player(String name, int health, Weapon weapon) {
         this.name = name;
         this.health = health;
         this.weapon = weapon;

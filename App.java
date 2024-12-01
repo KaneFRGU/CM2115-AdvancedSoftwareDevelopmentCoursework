@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -59,7 +58,7 @@ public class App {
             
             //=================initializing objects===========================
             Weapon knife = new Weapon("Knife", 1, 10);    
-            Player player = Player.getInstance(null, 100, knife);
+            Player player = new Player (null, 100, knife);
 
             Enemy scavengerA = new Enemy("Scavenger grunt", 1, 30, 10);
             Enemy scavengerB = new Enemy("Scavenger Brute", 2, 60, 20);
