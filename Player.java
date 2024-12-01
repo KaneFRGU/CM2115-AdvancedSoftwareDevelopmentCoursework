@@ -2,7 +2,7 @@ public class Player {
     private String name;
     public int health;
     private Weapon weapon;
-    int score;
+    public int score;
 
     public Player(String name, int health, Weapon weapon) {
         this.name = name;

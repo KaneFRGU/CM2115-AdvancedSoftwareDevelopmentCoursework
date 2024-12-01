@@ -52,7 +52,7 @@ public class App {
                     System.out.println("HIGH SCORE: " + nums[highscorenumber].replaceAll("[0-9]", "") + " - " + highScore);
                 }
             } catch (FileNotFoundException | ParseException e) {
-                System.out.println("An error occurred.");
+                System.out.println("An error occurred when reading file.");
                 e.printStackTrace();
             }
             
